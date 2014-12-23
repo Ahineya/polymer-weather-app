@@ -6,11 +6,30 @@
     <link rel="stylesheet" href="css/styles.css"/>
     <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
     <link rel="import" href="bower_components/font-roboto/roboto.html">
     <link rel="import" href="components/weather-card.html">
     <link rel="import" href="components/weather-list.html">
+    <link rel="import" href="/bower_components/core-input/core-input.html"/>
 </head>
 <body>
+    <polymer-element name="weather-place">
+        <template>
+            <div>
+                <p>Search for city</p>
+                <input aria-label="a single-line input" is="core-input" placeholder="input city or other place" committedValue={{place}}" on-change={{placeChanged}}>
+            </div>
+        </template>
+        <script>
+            Polymer({
+                place: '',
+                placeChanged: function(oldVal, newVal) {
+                    document.querySelector('weather-list').placeChanged(newVal);
+                }
+            });
+        </script>
+    </polymer-element>
+    <weather-place></weather-place>
     <weather-card mode="day" city="Kiev"></weather-card>
     <weather-card city="Kiev"></weather-card>
     <weather-card mode="day" city="London"></weather-card>
@@ -18,7 +37,7 @@
     <weather-card mode="day" city="Pripyat,ua"></weather-card>
     <weather-card mode="day" city="Donetsk,ua"></weather-card>
     <div style="float: left; clear: both; overflow-y: scroll; width: 600px; height: 400px;">
-        <weather-list style="" mode="list" place="Kyiv,ua"></weather-list>
+        <weather-list style="" mode="list" place="{{place}}"></weather-list>
     </div>
 </body>
 </html>
