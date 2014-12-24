@@ -100,7 +100,8 @@
                         break;
                     case 'dayData':
                         this.weather = JSON.parse(this.weatherdata);
-                        console.log('data', JSON.parse(this.weatherdata));
+                       // this.weather = this.weatherdata;
+                        console.log('data', this.weatherdata);
                         this.$.card.classList.remove('hide');
                         break;
                 }
